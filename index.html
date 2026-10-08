@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ရွှေထားဝယ် | ကိုဇော် လျှပ်စစ်ပစ္စည်းပြုပြင်ခြင်း</title>
+<link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--gold:#f2c14e;--card:rgba(255,255,255,.055);--line:rgba(255,255,255,.13);--txt:#eef1f7;--muted:#98a2b8}
+body{font-family:'Padauk','Noto Sans Myanmar',system-ui,sans-serif;background:#07090f;color:var(--txt);min-height:100vh;padding-bottom:50px;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:radial-gradient(900px 520px at 10% -10%,#24324f 0,transparent 62%),radial-gradient(820px 520px at 92% 0,#3b2a11 0,transparent 58%),radial-gradient(1100px 720px at 50% 112%,#12203a 0,transparent 62%),#07090f}
+.wrap{max-width:840px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:60;backdrop-filter:blur(18px);background:linear-gradient(180deg,rgba(9,11,19,.94),rgba(9,11,19,.66));border-bottom:1px solid var(--line)}
+.hd-in{max-width:840px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;gap:9px}
+.logo{width:50px;height:50px;flex:0 0 50px;border-radius:15px;background:linear-gradient(145deg,#f9dc80,#c9922b 55%,#8a5f12);display:grid;place-items:center;font-weight:700;color:#2a1c00;font-size:16px}
+.brand h1{font-size:19px;font-weight:700;background:linear-gradient(92deg,#ffeeb4,#f2c14e 42%,#d19b2c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand p{font-size:10.8px;color:var(--muted);line-height:1.45;margin-top:1px}
+.hd-actions{margin-left:auto;display:flex;gap:7px;flex:0 0 auto;align-items:center}
+.soundbtn,.callbtn{display:flex;align-items:center;gap:6px;text-decoration:none;padding:9px 12px;border-radius:30px;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--txt);cursor:pointer;font-family:inherit}
+.soundbtn{width:40px;justify-content:center;font-size:16px;padding:9px}
+.callbtn{color:#231800;border:none;background:linear-gradient(135deg,#ffdd8a,#e8ae2f)}
+.backbtn{width:40px;height:40px;flex:0 0 40px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:18px;cursor:pointer}
+.conn{width:10px;height:10px;border-radius:50%;background:#888;flex:0 0 10px;transition:.3s}
+.conn.ok{background:#22c55e;box-shadow:0 0 12px #22c55e}
+.conn.err{background:#ef4444;box-shadow:0 0 12px #ef4444}
+.conn.pending{background:#facc15;box-shadow:0 0 12px #facc15;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.view{display:none}
+.view.active{display:block;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.hero{text-align:center;padding:28px 0 4px}
+.hero .badge{display:inline-block;padding:6px 17px;border-radius:30px;font-size:11.5px;border:1px solid rgba(242,193,78,.42);color:var(--gold);background:rgba(242,193,78,.09);margin-bottom:14px}
+.hero h2{font-size:23px;line-height:1.55;font-weight:700}
+.hero h2 span{background:linear-gradient(92deg,#ffeeb4,#f2c14e,#d19b2c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:13px;margin-top:10px;line-height:1.85}
+.menu{display:grid;gap:17px;margin-top:26px}
+.hbtn{position:relative;text-align:left;cursor:pointer;overflow:hidden;border:1px solid var(--line);border-radius:22px;padding:23px 22px;background:linear-gradient(140deg,rgba(255,255,255,.09),rgba(255,255,255,.026));color:var(--txt);font-family:inherit;box-shadow:0 18px 40px -20px rgba(0,0,0,.9);width:100%}
+.hbtn:active{transform:scale(.98)}
+.hbtn .ico{width:58px;height:58px;border-radius:17px;display:grid;place-items:center;font-size:27px;margin-bottom:14px;background:linear-gradient(145deg,#f9dc80,#c9922b)}
+.hbtn.blue .ico{background:linear-gradient(145deg,#7dd3fc,#2563eb)}
+.hbtn h3{font-size:18.5px;font-weight:700;margin-bottom:7px}
+.hbtn p{font-size:12.7px;color:var(--muted);line-height:1.8;padding-right:26px}
+.hbtn .arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:20px;backdrop-filter:blur(10px)}
+.panel h3{font-size:16.5px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.panel h3::before{content:'';width:4px;height:19px;border-radius:4px;background:linear-gradient(180deg,#f9dc80,#c9922b)}
+label{display:block;font-size:12.3px;color:var(--muted);margin:0 0 6px 2px}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:13px;font-family:inherit;font-size:14.3px;background:rgba(0,0,0,.36);border:1px solid var(--line);color:var(--txt);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+input::placeholder,textarea::placeholder{color:#5d6880}
+input:disabled{opacity:.7}
+textarea{resize:vertical;min-height:64px}
+select option{background:#141926;color:#fff}
+.field{margin-bottom:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.code-row{display:flex;gap:8px;align-items:stretch}
+.code-row input{flex:1}
+.code-row .gen-btn{flex:0 0 auto;padding:12px 16px;border-radius:13px;border:1px solid rgba(242,193,78,.5);background:linear-gradient(135deg,rgba(242,193,78,.2),rgba(242,193,78,.08));color:var(--gold);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.code-row .gen-btn:hover{background:linear-gradient(135deg,rgba(242,193,78,.35),rgba(242,193,78,.15))}
+.code-row .gen-btn:disabled{opacity:.5;cursor:not-allowed}
+.btn{width:100%;padding:14px;border:none;border-radius:14px;cursor:pointer;font-family:inherit;font-size:15.3px;font-weight:700;color:#231800;background:linear-gradient(135deg,#ffdd8a,#e8ae2f);box-shadow:0 12px 26px -12px rgba(242,193,78,.85);transition:.2s}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);box-shadow:none}
+.btn.danger{background:linear-gradient(135deg,#ff9292,#d32f2f);color:#fff}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.stage{position:relative;width:100%;height:230px;margin:8px auto 6px;border-radius:20px;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.05),transparent 62%);display:grid;place-items:center;overflow:hidden}
+.stage .icon-big{font-size:80px;animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.status-badge{display:inline-flex;align-items:center;gap:9px;padding:11px 22px;border-radius:30px;font-weight:700;font-size:14.5px;background:color-mix(in srgb,var(--c1) 18%,transparent);border:1px solid var(--c1);color:var(--c1)}
+.status-badge .dot{width:10px;height:10px;border-radius:50%;background:var(--c1)}
+.center{text-align:center}
+.progress-wrap{margin:20px 0 4px}
+.progress-track{height:15px;border-radius:20px;background:rgba(0,0,0,.48);border:1px solid var(--line);overflow:hidden}
+.progress-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--c2),var(--c1));transition:width 1.5s ease}
+.progress-meta{display:flex;justify-content:space-between;font-size:12.3px;color:var(--muted);margin-top:9px}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:20px}
+.step{text-align:center}
+.step-dot{width:36px;height:36px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;font-size:13.5px;font-weight:700;background:rgba(255,255,255,.06);border:2px solid var(--line);color:var(--muted)}
+.step-label{font-size:10.2px;color:var(--muted);line-height:1.4}
+.step.done .step-dot{background:rgba(34,197,94,.17);border-color:#22c55e;color:#22c55e}
+.step.done .step-label{color:#86efac}
+.step.active .step-dot{background:var(--c1);border-color:var(--c1);color:#12151f}
+.step.active .step-label{color:var(--c1);font-weight:700}
+.step.error .step-dot{background:rgba(239,68,68,.22);border-color:#ef4444;color:#ef4444}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:20px}
+@media(max-width:540px){.info-grid{grid-template-columns:1fr}}
+.info-item{background:rgba(0,0,0,.32);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.info-item .k{font-size:10.8px;color:var(--muted);margin-bottom:5px}
+.info-item .v{font-size:14.3px;font-weight:600;word-break:break-word;line-height:1.55}
+.info-item.money .v{color:var(--gold);font-size:18px}
+.notice{margin-top:20px;padding:15px 17px;border-radius:15px;font-size:12.6px;line-height:1.95;background:linear-gradient(135deg,rgba(239,68,68,.14),rgba(239,68,68,.045));border:1px solid rgba(239,68,68,.42);color:#ffc9c9}
+.notice.gold{background:linear-gradient(135deg,rgba(242,193,78,.14),rgba(242,193,78,.04));border-color:rgba(242,193,78,.42);color:#ffe6ad}
+.ads-toolbar{display:flex;flex-direction:column;gap:11px;margin-bottom:14px}
+.search-wrap{position:relative}
+.search-wrap input{padding-left:42px}
+.search-wrap::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;opacity:.6;pointer-events:none}
+.filter-row{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:8px 15px;border-radius:24px;font-size:12.2px;font-weight:600;cursor:pointer;background:rgba(255,255,255,.055);border:1px solid var(--line);color:var(--muted);font-family:inherit;white-space:nowrap}
+.chip.active{background:linear-gradient(135deg,#ffdd8a,#e8ae2f);color:#231800;border-color:transparent}
+.chip.feat.active{background:linear-gradient(135deg,#f9a8d4,#db2777);color:#fff}
+.cat-select{padding:11px 14px;font-size:13px}
+.ad-grid{display:grid;gap:15px;margin-top:4px}
+.ad-card{position:relative;border-radius:19px;overflow:hidden;background:linear-gradient(140deg,rgba(255,255,255,.095),rgba(255,255,255,.03));border:1px solid var(--line);cursor:pointer}
+.ad-card.featured{border-color:rgba(219,39,119,.55)}
+.ad-card.inactive{opacity:.55}
+.ad-media{position:relative;width:100%;height:170px;overflow:hidden;background:linear-gradient(135deg,#1a2237,#0d1320);display:grid;place-items:center}
+.ad-media img{width:100%;height:100%;object-fit:cover;display:block}
+.ad-media .placeholder{font-size:44px;opacity:.35}
+.media-badges{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
+.media-badges .b{font-size:10px;font-weight:700;padding:5px 11px;border-radius:20px}
+.b-feat{background:linear-gradient(135deg,#f9a8d4,#db2777);color:#fff}
+.b-type{background:rgba(0,0,0,.6);color:#ffd98a;border:1px solid rgba(242,193,78,.4)}
+.b-off{background:linear-gradient(135deg,#86efac,#16a34a);color:#042a12}
+.ad-body{padding:15px 16px 17px}
+.ad-body h4{font-size:16px;margin-bottom:6px;color:#ffeeb4;line-height:1.5}
+.ad-desc{font-size:12.6px;color:var(--muted);line-height:1.85;margin:9px 0 11px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ad-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tag{font-size:10.4px;padding:4px 10px;border-radius:20px;background:rgba(242,193,78,.14);color:var(--gold);border:1px solid rgba(242,193,78,.34)}
+.tag.gray{background:rgba(255,255,255,.07);color:var(--muted);border-color:var(--line)}
+.ad-price-row{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:11px}
+.ad-price{color:#7dffb0;font-weight:700;font-size:18px}
+.ad-old{color:#7a8499;text-decoration:line-through;font-size:13px}
+.ad-off{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(239,68,68,.2);color:#ff9a9a;border:1px solid rgba(239,68,68,.4)}
+.ad-meta{display:flex;flex-wrap:wrap;gap:11px;font-size:11.6px;color:var(--muted);margin-bottom:12px}
+.ad-actions{display:flex;gap:9px}
+.ad-call{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;border-radius:12px;text-decoration:none;font-size:13.5px;font-weight:700;color:#231800;background:linear-gradient(135deg,#ffdd8a,#e8ae2f)}
+.ad-detail-btn{flex:0 0 auto;padding:11px 15px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--txt);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.ad-detail-hero{width:100%;height:220px;border-radius:16px;overflow:hidden;margin-bottom:15px;background:linear-gradient(135deg,#1a2237,#0d1320);display:grid;place-items:center}
+.ad-detail-hero img{width:100%;height:100%;object-fit:cover}
+.ad-detail-hero .placeholder{font-size:56px;opacity:.3}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media(max-width:520px){.detail-grid{grid-template-columns:1fr}}
+.detail-item{background:rgba(0,0,0,.34);border:1px solid var(--line);border-radius:12px;padding:10px 13px}
+.detail-item .k{font-size:10.5px;color:var(--muted);margin-bottom:4px}
+.detail-item .v{font-size:13.6px;font-weight:600;word-break:break-word}
+.detail-desc{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:13px;padding:13px 15px;font-size:13px;line-height:1.95;color:#d5dbe8;white-space:pre-wrap}
+.img-upload{border:2px dashed var(--line);border-radius:15px;padding:22px;text-align:center;cursor:pointer;background:rgba(0,0,0,.22)}
+.img-upload .up-ico{font-size:32px;margin-bottom:8px;opacity:.7}
+.img-upload p{font-size:12.3px;color:var(--muted);line-height:1.75}
+.img-preview{position:relative;border-radius:15px;overflow:hidden;border:1px solid var(--line)}
+.img-preview img{width:100%;display:block;max-height:220px;object-fit:cover}
+.img-remove{position:absolute;top:9px;right:9px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(239,68,68,.9);color:#fff;font-size:15px;cursor:pointer;display:grid;place-items:center}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:13px;background:rgba(0,0,0,.28);border:1px solid var(--line);margin-bottom:11px}
+.toggle-row .tl{font-size:13.2px;font-weight:600}
+.toggle-row .ts{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}
+.switch{position:relative;width:52px;height:30px;flex:0 0 52px;cursor:pointer}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.slider{position:absolute;inset:0;border-radius:30px;background:rgba(255,255,255,.14);transition:.3s;border:1px solid var(--line)}
+.slider::before{content:'';position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.3s}
+.switch input:checked+.slider{background:linear-gradient(135deg,#ffdd8a,#e8ae2f);border-color:transparent}
+.switch input:checked+.slider::before{transform:translateX(22px);background:#231800}
+.switch.pink input:checked+.slider{background:linear-gradient(135deg,#f9a8d4,#db2777)}
+.switch.pink input:checked+.slider::before{background:#fff}
+.tabs{display:flex;gap:8px;margin-bottom:16px;background:rgba(0,0,0,.32);padding:6px;border-radius:14px;border:1px solid var(--line)}
+.tab{flex:1;padding:11px;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13.2px;font-weight:600;background:transparent;color:var(--muted)}
+.tab.active{background:linear-gradient(135deg,#ffdd8a,#e8ae2f);color:#231800}
+.list-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:15px;background:rgba(0,0,0,.32);border:1px solid var(--line);margin-bottom:10px}
+.list-item .li-main{flex:1;min-width:0}
+.list-item .li-main strong{font-size:14.2px;display:block;margin-bottom:6px;color:#fff}
+.list-item .li-main small{color:var(--muted);font-size:11.6px;display:block;line-height:1.8;word-break:break-word}
+.li-thumb{width:58px;height:58px;flex:0 0 58px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a2237,#0d1320);display:grid;place-items:center;font-size:22px}
+.li-thumb img{width:100%;height:100%;object-fit:cover}
+.pill{display:inline-block;font-size:10.2px;padding:3px 10px;border-radius:20px;margin-top:7px;font-weight:700;margin-right:4px}
+.li-actions{display:flex;flex-direction:column;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);cursor:pointer;font-size:14px;color:var(--txt)}
+.icon-btn.del:hover{background:rgba(239,68,68,.3)}
+.icon-btn.acc:hover{background:rgba(34,197,94,.28)}
+.empty{text-align:center;padding:34px 10px;color:var(--muted);font-size:13.3px}
+.empty div{font-size:38px;margin-bottom:10px;opacity:.5}
+.sec-title{font-size:14.5px;font-weight:700;margin:26px 0 10px;color:#ffeeb4;display:flex;align-items:center;gap:8px}
+.sec-title .mini-btn{margin-left:auto;font-size:11px;padding:6px 12px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--txt);cursor:pointer;font-family:inherit}
+.sync-bar{display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:12px;background:rgba(0,0,0,.32);border:1px solid var(--line);margin-top:14px;font-size:11.8px}
+.sync-bar.ok{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.08)}
+.sync-bar.err{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08)}
+.sync-bar.pending{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.08)}
+.sync-bar .dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.sync-bar.ok .dot{background:#22c55e}
+.sync-bar.err .dot{background:#ef4444}
+.sync-bar.pending .dot{background:#facc15}
+.sync-bar button{margin-left:auto;font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--txt);cursor:pointer;font-family:inherit}
+.diag{font-size:11px;color:var(--muted);line-height:1.7;margin-top:8px;padding:10px 12px;background:rgba(0,0,0,.4);border-radius:10px;border:1px solid var(--line);font-family:monospace;word-break:break-all;max-height:100px;overflow-y:auto}
+.modal-bg{position:fixed;inset:0;z-index:150;background:rgba(4,6,11,.82);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}
+.modal-bg.show{display:flex}
+.modal{width:100%;max-width:490px;max-height:90vh;overflow-y:auto;background:linear-gradient(150deg,#151b2b,#0e1320);border:1px solid var(--line);border-radius:20px;padding:20px}
+.modal h4{font-size:16px;margin-bottom:4px;color:#ffeeb4}
+.modal .sub{font-size:11.8px;color:var(--muted);margin-bottom:16px}
+.status-picker{display:grid;gap:9px;margin-bottom:16px}
+.sp-opt{display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:13px;cursor:pointer;background:rgba(0,0,0,.32);border:1.5px solid var(--line)}
+.sp-opt.sel{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 15%,transparent)}
+.sp-dot{width:16px;height:16px;border-radius:50%;flex:0 0 16px;background:var(--sc)}
+.sp-txt{font-size:13.2px;font-weight:600;color:var(--txt);line-height:1.4}
+.modal-scroll{max-height:calc(90vh - 40px);overflow-y:auto;padding-right:3px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,130px);padding:13px 24px;border-radius:14px;font-size:13.8px;font-weight:600;z-index:300;background:linear-gradient(135deg,#ffdd8a,#e8ae2f);color:#231800;box-shadow:0 18px 40px -12px rgba(0,0,0,.9);opacity:0;transition:.4s;max-width:88vw;text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.err{background:linear-gradient(135deg,#ff9a9a,#d32f2f);color:#fff}
+.toast.ok{background:linear-gradient(135deg,#8ef0b0,#22c55e);color:#062b13}
+.code-input{text-align:center;font-size:22px;letter-spacing:4px;font-weight:700;text-transform:uppercase;padding:14px;color:var(--gold)}
+.hint{font-size:11.4px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.85}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-in">
+    <button class="backbtn" id="backBtn" style="display:none" onclick="goHome()">←</button>
+    <div class="logo">ရွှေ</div>
+    <div class="brand"><h1>ရွှေထားဝယ်</h1><p>ကိုဇော် လျှပ်စစ်ပစ္စည်းပြုပြင်ခြင်း</p></div>
+    <div class="hd-actions">
+      <span class="conn pending" id="connDot" title="Supabase"></span>
+      <button class="soundbtn" id="soundBtn" onclick="toggleSound()">🔊</button>
+      <a class="callbtn" href="tel:09422222535">📞</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <div class="badge">✦ ယုံကြည်စိတ်ချရသော ဝန်ဆောင်မှု ✦</div>
+      <h2>ဆက်သွယ်ရန် <span>09422222535</span></h2>
+      <p>လျှပ်စစ်ပစ္စည်းများ ပြုပြင်ခြင်း • ကြော်ငြာဝန်ဆောင်မှုများ<br>ထားဝယ်မြို့နှင့် အနီးတစ်ဝိုက်</p>
+    </div>
+    <div class="menu">
+      <button class="hbtn" onclick="openRepair()"><div class="ico">🔧</div><h3>လျှပ်စစ်ပစ္စည်းပြုပြင်ခြင်း</h3><p>Code ဖြည့်ပြီး ပြုပြင်နေမှု အခြေအနေကို ကြည့်ရှုပါ။</p><span class="arrow">›</span></button>
+      <button class="hbtn blue" onclick="openAds()"><div class="ico">📢</div><h3>ကြော်ငြာဝန်ဆောင်မှုများ</h3><p>လုပ်ငန်းအမည် • အကြောင်းအရာ • ဈေးနှုန်း • ဆက်သွယ်ရန်</p><span class="arrow">›</span></button>
+    </div>
+    <div class="notice gold" style="margin-top:26px">⏳ <b>သတိပြုရန် —</b> ပြုပြင်ပစ္စည်းများ <b>၃ လ</b> အတွင်း ထုတ်ယူပါ။</div>
+    <div class="sync-bar pending" id="syncBar">
+      <span class="dot"></span>
+      <span id="syncText">Supabase စစ်ဆေးနေသည်...</span>
+      <button onclick="manualSync()">🔄 Sync</button>
+    </div>
+    <div class="diag" id="diagBox">Connecting...</div>
+    <button class="btn ghost" style="margin-top:14px" onclick="openLogin()">🔐 Admin Login</button>
+  </section>
+
+  <section class="view" id="view-repair">
+    <div class="panel">
+      <h3>ပြုပြင်မှု အခြေအနေ စစ်ဆေးရန်</h3>
+      <p style="font-size:12.8px;color:var(--muted);line-height:1.95;margin-bottom:16px">သင့်ပစ္စည်း <b style="color:var(--gold)">Code</b> ကို အောက်တွင် ဖြည့်ပါ။</p>
+      <div class="field"><label>ပြုပြင်မှု Code</label><input class="code-input" id="codeInput" placeholder="KZ-0000" autocomplete="off"></div>
+      <button class="btn" id="searchRepairBtn" onclick="searchRepair()">🔍 အခြေအနေ ကြည့်ရန်</button>
+      <div class="hint">Code မသိပါက ဆိုင်ဖုန်း <b style="color:var(--gold)">09422222535</b> သို့ ဆက်သွယ်ပါ။</div>
+    </div>
+  </section>
+
+  <section class="view" id="view-result">
+    <div class="panel" id="resultCard">
+      <div class="center"><div class="status-badge" id="resBadge"><span class="dot"></span><span id="resStatusText"></span></div></div>
+      <div class="stage" id="stage"></div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="resFill"></div></div>
+        <div class="progress-meta"><span id="resPct">0%</span><span id="resElapsed">—</span></div>
+      </div>
+      <div class="stepper" id="resStepper"></div>
+      <div id="resBanner"></div>
+      <div class="info-grid" id="resInfo"></div>
+      <div class="notice">⏳ <b>သတိပြုရန် —</b> ပြုပြင်ပစ္စည်းများ <b>၃ လ</b> အတွင်း ထုတ်ယူပါ။</div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn ghost" style="flex:1" onclick="openRepair()">← Code အသစ်</button>
+        <a class="btn" style="flex:1;text-align:center;text-decoration:none;display:grid;place-items:center" href="tel:09422222535">📞 ဆက်သွယ်</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-ads">
+    <div class="panel">
+      <h3>📢 ကြော်ငြာဝန်ဆောင်မှုများ</h3>
+      <div class="ads-toolbar">
+        <div class="search-wrap"><input id="adSearch" placeholder="ရှာဖွေရန်..." oninput="renderAdsPublic()"></div>
+        <div class="filter-row" id="adFilters"></div>
+        <select class="cat-select" id="adCatFilter" onchange="renderAdsPublic()"><option value="">— အမျိုးအစား အားလုံး —</option></select>
+      </div>
+    </div>
+    <div class="ad-grid" id="adGrid"></div>
+    <button class="btn ghost" style="margin-top:18px" onclick="openLogin()">🔐 Admin Login</button>
+  </section>
+
+  <section class="view" id="view-login">
+    <div class="panel">
+      <h3>🔐 Admin Login</h3>
+      <div class="field"><label>Admin Name</label><input id="lgName" placeholder="Admin Name" autocomplete="off"></div>
+      <div class="field"><label>Viber / ဖုန်း</label><input id="lgViber" placeholder="09xxxxxxxxx" autocomplete="off"></div>
+      <div class="field"><label>Password</label><input id="lgPass" type="password" placeholder="••••••••" autocomplete="off"></div>
+      <button class="btn" id="loginBtn" onclick="doLogin()">ဝင်ရောက်ရန်</button>
+    </div>
+  </section>
+
+  <section class="view" id="view-admin">
+    <div class="panel">
+      <h3>⚙️ Admin Control Panel</h3>
+      <div class="tabs">
+        <button class="tab active" id="tabRepair" onclick="switchTab('repair')">🔧 ပြုပြင်မှု</button>
+        <button class="tab" id="tabAds" onclick="switchTab('ads')">📢 ကြော်ငြာ</button>
+      </div>
+      <div id="paneRepair">
+        <button class="btn" onclick="openRepairModal()">➕ ပြုပြင်ပစ္စည်း လက်ခံမည်</button>
+        <div class="sec-title">📋 စာရင်း (<span id="repairCount">0</span>)<button class="mini-btn" onclick="refreshRepairs()">🔄</button></div>
+        <div id="repairList"></div>
+      </div>
+      <div id="paneAds" style="display:none">
+        <button class="btn" onclick="openAdModal()">➕ ကြော်ငြာ အသစ်</button>
+        <div class="sec-title">📋 စာရင်း (<span id="adCount">0</span>)<button class="mini-btn" onclick="refreshAds()">🔄</button></div>
+        <div id="adList"></div>
+      </div>
+      <button class="btn danger" style="margin-top:22px" onclick="logout()">🚪 Logout</button>
+    </div>
+  </section>
+</div>
+
+<div class="modal-bg" id="repairModal">
+  <div class="modal">
+    <h4 id="rmTitle">🔧 ပြုပြင်ပစ္စည်း လက်ခံမည်</h4>
+    <p class="sub">Code ကို Generate button နှိပ်ပြီး ရယူပါ။</p>
+    <div class="field">
+      <label>Code</label>
+      <div class="code-row">
+        <input id="rCode" placeholder="KZ-0000" style="text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--gold);text-align:center">
+        <button class="gen-btn" id="genCodeBtn" onclick="generateCode()">🎲 Generate</button>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>ပိုင်ရှင်အမည် *</label><input id="rOwner" placeholder="ဦး/ဒေါ် ..."></div>
+      <div class="field"><label>ဖုန်းနံပါတ် *</label><input id="rPhone" placeholder="09xxxxxxxxx"></div>
+    </div>
+    <div class="field"><label>လိပ်စာ</label><input id="rAddress" placeholder="မြို့ / ရပ်ကွက်"></div>
+    <div class="grid2">
+      <div class="field"><label>ပစ္စည်းအမျိုးအစား *</label><input id="rDevice" placeholder="အဝတ်လျှော်စက်"></div>
+      <div class="field"><label>မော်ဒယ်နံပါတ်</label><input id="rModel" placeholder="Model"></div>
+    </div>
+    <div class="field"><label>အပ်နှံအချိန်</label><input id="rReceived" type="datetime-local"></div>
+    <div class="field"><label>မှတ်ချက်</label><textarea id="rNote" placeholder="..."></textarea></div>
+    <div class="row">
+      <button class="btn" style="flex:1" onclick="saveRepair()" id="repairSaveBtn">💾 Save</button>
+      <button class="btn ghost" style="flex:0 0 auto" onclick="closeRepairModal()">မလုပ်တော့ပါ</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="statusModal">
+  <div class="modal">
+    <h4 id="smTitle">🔧 အခြေအနေ သတ်မှတ်ရန်</h4>
+    <p class="sub" id="smSub">—</p>
+    <div class="status-picker" id="statusPicker"></div>
+    <div class="grid2">
+      <div class="field"><label>စတင်ချိန်</label><input id="smStart" type="datetime-local"></div>
+      <div class="field"><label>ပြီးစီးချိန်</label><input id="smDone" type="datetime-local"></div>
+    </div>
+    <div class="field"><label>ကျသင့်ငွေ (ကျပ်)</label><input id="smCost" placeholder="0"></div>
+    <div class="field"><label>မှတ်ချက်</label><textarea id="smNote" placeholder="..."></textarea></div>
+    <div class="row">
+      <button class="btn" style="flex:1" onclick="saveStatus()" id="statusSaveBtn">💾 သတ်မှတ်မည်</button>
+      <button class="btn ghost" style="flex:0 0 auto" onclick="closeStatusModal()">မလုပ်တော့ပါ</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="adModal">
+  <div class="modal">
+    <div class="modal-scroll">
+      <h4 id="amTitle">📢 ကြော်ငြာ အသစ်</h4>
+      <p class="sub">အချက်အလက်များ ဖြည့်ပါ။</p>
+      <div class="field"><label>ဓာတ်ပုံ</label><div id="adImgZone"></div>
+        <input type="file" id="adImgFile" accept="image/*" style="display:none" onchange="handleAdImage(event)"></div>
+      <div class="field"><label>လုပ်ငန်းအမည် *</label><input id="aBusiness" placeholder="..."></div>
+      <div class="grid2">
+        <div class="field"><label>ကြော်ငြာ အမျိုးအစား *</label>
+          <select id="aType">
+            <option value="new">🆕 အသစ်</option>
+            <option value="used">♻️ အသုံးပြုပြီး</option>
+            <option value="service">🛠️ ဝန်ဆောင်မှု</option>
+            <option value="discount">🏷️ လျှော့ဈေး</option>
+            <option value="job">💼 အလုပ်အကိုင်</option>
+          </select>
+        </div>
+        <div class="field"><label>ပစ္စည်း အမျိုးအစား *</label><select id="aCategory"><option value="">— ရွေးပါ —</option></select></div>
+      </div>
+      <div class="field"><label>အကြောင်းအရာ *</label><textarea id="aDesc" style="min-height:100px"></textarea></div>
+      <div class="grid2">
+        <div class="field"><label>အရေအတွက်</label><input id="aQty"></div>
+        <div class="field"><label>ဈေးနှုန်း (ကျပ်) *</label><input id="aPrice"></div>
+      </div>
+      <div class="field"><label>မူရင်းဈေး</label><input id="aOldPrice"></div>
+      <div class="grid2">
+        <div class="field"><label>ဖုန်းနံပါတ် *</label><input id="aPhone"></div>
+        <div class="field"><label>ပုဂ္ဂိုလ်</label><input id="aContact"></div>
+      </div>
+      <div class="field"><label>တည်နေရာ</label><input id="aLocation"></div>
+      <div class="field"><label>Tag များ</label><input id="aTags" placeholder="အာမခံ, အရစ်ကျ"></div>
+      <div class="field"><label>သက်တမ်း</label><input id="aExpiry" type="date"></div>
+      <div class="toggle-row">
+        <div><div class="tl">⭐ အထူးကြော်ငြာ</div></div>
+        <label class="switch pink"><input type="checkbox" id="aFeatured"><span class="slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <div><div class="tl">✅ အသက်ဝင်သော ကြော်ငြာ</div></div>
+        <label class="switch"><input type="checkbox" id="aActive" checked><span class="slider"></span></label>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn" style="flex:1" onclick="saveAd()" id="adSaveBtn">💾 Save</button>
+        <button class="btn ghost" style="flex:0 0 auto" onclick="closeAdModal()">မလုပ်တော့ပါ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="adDetailModal"><div class="modal"><div class="modal-scroll" id="adDetailBody"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════════════════ */
+const SUPABASE_URL = 'https://eqaupjrgwnxcdtddsskh.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_px3APjhGCRTaNDx8I9eyog_CZ3upTRU';
+const ADMIN = { name:'KhinMaungZaw', viber:'09422222535', pass:'094688Aa' };
+const LS = { repairs:'sdw_repairs_v11', ads:'sdw_ads_v11', seq:'sdw_seq_v11' };
+
+/* ═══════════════════════════════════════════════════════
+   STATUS / TYPES
+═══════════════════════════════════════════════════════ */
+const STATUS = {
+  received : { label:'လက်ခံထားသည်', color:'#a855f7', color2:'#6d28d9', pct:15, icon:'📥', step:0 },
+  checking : { label:'စစ်ဆေးနေပါသည်', color:'#facc15', color2:'#b45309', pct:40, icon:'🔍', step:1 },
+  repairing: { label:'ပြုပြင်နေပါပြီ', color:'#fb923c', color2:'#c2410c', pct:70, icon:'🔧', step:2 },
+  noparts  : { label:'ပြုပြင်မရတော့ပါ', color:'#ef4444', color2:'#991b1b', pct:40, icon:'⛔', step:1 },
+  done     : { label:'ပြုပြင်ပြီးစီး', color:'#22c55e', color2:'#15803d', pct:100, icon:'✅', step:3 }
+};
+const STATUS_ORDER = ['received','checking','repairing','noparts','done'];
+const AD_TYPES = {
+  new:{label:'အသစ်',short:'အသစ်',icon:'🆕'},
+  used:{label:'အသုံးပြုပြီး',short:'အသုံးပြုပြီး',icon:'♻️'},
+  service:{label:'ဝန်ဆောင်မှု',short:'ဝန်ဆောင်မှု',icon:'🛠️'},
+  discount:{label:'လျှော့ဈေး',short:'လျှော့ဈေး',icon:'🏷️'},
+  job:{label:'အလုပ်အကိုင်',short:'အလုပ်',icon:'💼'}
+};
+const AD_CATEGORIES = ['မိုဘိုင်းဖုန်း / တက်ဘလက်','လျှပ်စစ်ပစ္စည်း','အိမ်သုံးပစ္စည်း','ကွန်ပျူတာ / IT','မော်တော်ဆိုင်ကယ် / ယာဉ်','အိမ်ခြံမြေ','အဝတ်အထည် / အလှကုန်','ဝန်ဆောင်မှု','အလုပ်အကိုင်','အခြား'];
+
+/* ═══════════════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,'0');
+const esc = x => String(x==null?'':x).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function fmt(iso){ if(!iso) return '—'; const d = new Date(iso); if(isNaN(d)) return '—'; return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}  ${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+function fmtDate(iso){ if(!iso) return '—'; const d = new Date(iso); if(isNaN(d)) return '—'; return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`; }
+function toLocal(iso){ if(!iso) return ''; const d = new Date(iso); if(isNaN(d)) return ''; return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`; }
+function toDateInput(iso){ if(!iso) return ''; const d = new Date(iso); if(isNaN(d)) return ''; return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function fromLocal(v){ return v ? new Date(v).toISOString() : ''; }
+function fromDateInput(v){ return v ? new Date(v + 'T23:59:59').toISOString() : ''; }
+function money(v){ if(v===''||v==null) return '—'; const n = Number(v); return isNaN(n) ? '—' : n.toLocaleString('en-US'); }
+function dur(ms){ if(ms<0) ms=0; const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4); let s=''; if(d) s+=d+' ရက် '; if(h) s+=h+' နာရီ '; s+=m+' မိနစ်'; return s; }
+function calcOff(price, old){ const p=Number(price), o=Number(old); if(!p||!o||o<=p) return 0; return Math.round((1-p/o)*100); }
+function isExpired(iso){ if(!iso) return false; return new Date(iso).getTime() < Date.now(); }
+function lsGet(k, def){ try{ const v = JSON.parse(localStorage.getItem(k)); return v == null ? def : v; }catch(e){ return def; } }
+function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ console.error('lsSet fail:', e); } }
+
+function toast(msg, type){
+  const t = $('toast'); if(!t) return;
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' '+type : '');
+  clearTimeout(t._tm); t._tm = setTimeout(() => t.className = 'toast', 3500);
+}
+function setBtn(btn, on, text){
+  if(!btn) return;
+  if(on){ btn._o = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> '+(text||''); }
+  else { btn.disabled = false; if(btn._o) btn.innerHTML = btn._o; }
+}
+function setConn(state){
+  const d = $('connDot'); if(!d) return;
+  d.className = 'conn ' + state;
+}
+function setSync(state, text){
+  const bar = $('syncBar'), txt = $('syncText');
+  if(bar) bar.className = 'sync-bar ' + (state === 'ok' ? 'ok' : state === 'err' ? 'err' : 'pending');
+  if(txt) txt.textContent = text;
+}
+function diag(msg){
+  const d = $('diagBox'); if(!d) return;
+  const time = new Date().toLocaleTimeString();
+  d.textContent = `[${time}] ${msg}\n` + d.textContent;
+  console.log('[DIAG]', msg);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SOUND
+═══════════════════════════════════════════════════════ */
+const Sound = (function(){
+  let ctx=null, on = localStorage.getItem('sdw_sound') !== 'off';
+  function init(){ if(!ctx){ try{ ctx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){return null;} } if(ctx.state==='suspended') ctx.resume(); return ctx; }
+  function tone(f,d,t,v,dl){ if(!on) return; const c=init(); if(!c) return; const n=c.currentTime+(dl||0); const o=c.createOscillator(), g=c.createGain(); o.type=t||'sine'; o.frequency.setValueAtTime(f,n); g.gain.setValueAtTime(.0001,n); g.gain.exponentialRampToValueAtTime(v||.12,n+.012); g.gain.exponentialRampToValueAtTime(.0001,n+d); o.connect(g); g.connect(c.destination); o.start(n); o.stop(n+d+.05); }
+  return {
+    isOn:()=>on,
+    toggle(){ on=!on; localStorage.setItem('sdw_sound',on?'on':'off'); if(on){ init(); tone(1150,.05,'sine',.07); } return on; },
+    click(){ tone(1150,.05,'sine',.07); tone(1700,.04,'sine',.04,.02); },
+    ok(){ tone(523,.11,'sine',.11); tone(659,.11,'sine',.11,.09); tone(784,.22,'sine',.13,.18); },
+    err(){ tone(210,.14,'sawtooth',.09); tone(160,.18,'square',.06,.1); }
+  };
+})();
+function toggleSound(){ const o=Sound.toggle(); const b=$('soundBtn'); b.textContent=o?'🔊':'🔇'; }
+if(!Sound.isOn()){ const b=$('soundBtn'); if(b) b.textContent='🔇'; }
+
+/* ═══════════════════════════════════════════════════════
+   SUPABASE REST CLIENT — Direct fetch, no SDK
+═══════════════════════════════════════════════════════ */
+const SB = {
+  url: SUPABASE_URL,
+  key: SUPABASE_KEY,
+  ok: false,
+
+  headers(extra){
+    return Object.assign({
+      'apikey': this.key,
+      'Authorization': 'Bearer ' + this.key,
+      'Content-Type': 'application/json'
+    }, extra || {});
+  },
+
+  async test(){
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 10000);
+      const res = await fetch(this.url + '/rest/v1/repairs?select=code&limit=1', {
+        method: 'GET',
+        headers: this.headers(),
+        signal: ctrl.signal
+      });
+      clearTimeout(t);
+      diag(`Test: HTTP ${res.status} ${res.statusText}`);
+      if(res.ok || res.status === 200 || res.status === 206){
+        this.ok = true;
+        return { ok: true, status: res.status };
+      }
+      if(res.status === 401 || res.status === 403){
+        const body = await res.text();
+        diag(`Auth error: ${body.slice(0,200)}`);
+        return { ok: false, status: res.status, error: 'Key မမှန် / Policy' };
+      }
+      if(res.status === 404){
+        diag(`Table not found — SQL run ပါ`);
+        return { ok: false, status: 404, error: 'Table မရှိ — SQL run ပါ' };
+      }
+      const body = await res.text();
+      diag(`HTTP ${res.status}: ${body.slice(0,150)}`);
+      return { ok: false, status: res.status, error: `HTTP ${res.status}` };
+    } catch(e){
+      const msg = e.name === 'AbortError' ? 'Timeout (10s)' : (e.message || 'Network error');
+      diag(`❌ Fetch failed: ${msg}`);
+      return { ok: false, error: msg };
+    }
+  },
+
+  async select(table, query){
+    const res = await fetch(this.url + '/rest/v1/' + table + (query ? '?' + query : ''), {
+      method: 'GET',
+      headers: this.headers()
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`HTTP ${res.status}: ${body.slice(0,150)}`);
+    }
+    return res.json();
+  },
+
+  async insert(table, payload){
+    const res = await fetch(this.url + '/rest/v1/' + table, {
+      method: 'POST',
+      headers: this.headers({ 'Prefer': 'return=representation' }),
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`HTTP ${res.status}: ${body.slice(0,200)}`);
+    }
+    return res.json();
+  },
+
+  async upsert(table, payload, conflictCol){
+    const res = await fetch(this.url + '/rest/v1/' + table + '?on_conflict=' + conflictCol, {
+      method: 'POST',
+      headers: this.headers({ 'Prefer': 'resolution=merge-duplicates,return=representation' }),
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`HTTP ${res.status}: ${body.slice(0,200)}`);
+    }
+    return res.json();
+  },
+
+  async update(table, query, payload){
+    const res = await fetch(this.url + '/rest/v1/' + table + '?' + query, {
+      method: 'PATCH',
+      headers: this.headers({ 'Prefer': 'return=representation' }),
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`HTTP ${res.status}: ${body.slice(0,200)}`);
+    }
+    return res.json();
+  },
+
+  async remove(table, query){
+    const res = await fetch(this.url + '/rest/v1/' + table + '?' + query, {
+      method: 'DELETE',
+      headers: this.headers({ 'Prefer': 'return=representation' })
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`HTTP ${res.status}: ${body.slice(0,200)}`);
+    }
+    return true;
+  },
+
+  async rpc(fn, params){
+    const res = await fetch(this.url + '/rest/v1/rpc/' + fn, {
+      method: 'POST',
+      headers: this.headers(),
+      body: JSON.stringify(params || {})
+    });
+    if(!res.ok){
+      const body = await res.text();
+      throw new Error(`RPC ${res.status}: ${body.slice(0,150)}`);
+    }
+    return res.json();
+  }
+};
+
+/* ═══════════════════════════════════════════════════════
+   DATA MAPPERS
+═══════════════════════════════════════════════════════ */
+function toDbRepair(r){
+  return {
+    code: r.code, owner: r.owner, phone: r.phone,
+    address: r.address || '', device: r.device, model: r.model || '',
+    status: r.status,
+    received_at: r.receivedAt || new Date().toISOString(),
+    start_at: r.startAt || null,
+    done_at: r.doneAt || null,
+    cost: Number(r.cost) || 0,
+    note: r.note || ''
+  };
+}
+function fromDbRepair(r){
+  return {
+    code: r.code, owner: r.owner, phone: r.phone,
+    address: r.address || '', device: r.device, model: r.model || '',
+    status: r.status, receivedAt: r.received_at || '',
+    startAt: r.start_at || '', doneAt: r.done_at || '',
+    cost: Number(r.cost) || 0, note: r.note || ''
+  };
+}
+function toDbAd(a){
+  return {
+    business: a.business,
+    ad_type: a.adType || 'new',
+    category: a.category,
+    description: a.description,
+    image: a.image || '',
+    qty: String(a.qty || ''),
+    price: String(a.price || ''),
+    old_price: String(a.oldPrice || ''),
+    phone: a.phone,
+    contact: a.contact || '',
+    location: a.location || '',
+    tags: a.tags || '',
+    featured: !!a.featured,
+    active: a.active !== false,
+    expiry: a.expiry || null
+  };
+}
+function fromDbAd(a){
+  return {
+    _dbId: a.id, id: a.id, business: a.business, adType: a.ad_type,
+    category: a.category, description: a.description,
+    image: a.image || '', qty: a.qty || '', price: a.price || '',
+    oldPrice: a.old_price || '', phone: a.phone, contact: a.contact || '',
+    location: a.location || '', tags: a.tags || '', featured: !!a.featured,
+    active: a.active !== false, expiry: a.expiry || '',
+    createdAt: a.created_at || '', views: a.views || 0
+  };
+}
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let repairs = lsGet(LS.repairs, []);
+let ads = lsGet(LS.ads, []);
+let currentRepair = null, elapsedTimer = null, pctTimer = null;
+let adFilter = 'all', adCatFilter = '';
+let editRepairCode = null;
+let editAdKey = null, adImgData = '';
+let statusCode = null, statusPick = null;
+
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════ */
+const VIEWS = ['home','repair','result','ads','login','admin'];
+function showView(n){
+  VIEWS.forEach(v => { const el=$('view-'+v); if(el) el.classList.toggle('active', v===n); });
+  const bb = $('backBtn'); if(bb) bb.style.display = (n==='home') ? 'none' : 'block';
+  try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){}
+}
+function goHome(){ showView('home'); }
+function openRepair(){ showView('repair'); const ci=$('codeInput'); if(ci){ ci.value=''; setTimeout(()=>ci.focus(),300); } }
+function openAds(){ initAdsFilters(); renderAdsPublic(); showView('ads'); if(SB.ok) refreshAds(); }
+function openLogin(){
+  if(localStorage.getItem('sdw_auth') === '1'){ openAdmin(); return; }
+  ['lgName','lgViber','lgPass'].forEach(id => { const el=$(id); if(el) el.value=''; });
+  showView('login');
+}
+function openAdmin(){
+  showView('admin'); switchTab('repair');
+  renderRepairList(); renderAdList();
+  if(SB.ok){ refreshRepairs(); refreshAds(); }
+}
+function doLogin(){
+  const btn = $('loginBtn');
+  const n = $('lgName').value.trim();
+  const v = $('lgViber').value.trim();
+  const p = $('lgPass').value;
+  if(n.toLowerCase() !== ADMIN.name.toLowerCase() || v !== ADMIN.viber || p !== ADMIN.pass){
+    toast('အချက်အလက် မမှန်ကန်ပါ','err'); Sound.err(); return;
+  }
+  setBtn(btn, true, 'ဝင်ရောက်နေသည်...');
+  localStorage.setItem('sdw_auth','1');
+  setTimeout(() => {
+    setBtn(btn, false);
+    toast('ကြိုဆိုပါသည် Admin','ok'); Sound.ok();
+    openAdmin();
+  }, 300);
+}
+function logout(){
+  localStorage.removeItem('sdw_auth');
+  toast('Logout ပြီးပါပြီ');
+  goHome();
+}
+function switchTab(t){
+  const isR = t === 'repair';
+  $('tabRepair').classList.toggle('active', isR);
+  $('tabAds').classList.toggle('active', !isR);
+  $('paneRepair').style.display = isR ? 'block' : 'none';
+  $('paneAds').style.display = isR ? 'none' : 'block';
+}
+
+/* ═══════════════════════════════════════════════════════
+   CODE GENERATION — Manual button
+═══════════════════════════════════════════════════════ */
+function getLocalMaxCode(){
+  let max = 1000;
+  repairs.forEach(r => {
+    const m = String(r.code||'').match(/^KZ-(\d+)$/);
+    if(m){ const n = parseInt(m[1],10); if(n > max) max = n; }
+  });
+  const seqStored = Number(lsGet(LS.seq, 0)) || 0;
+  return Math.max(max, seqStored);
+}
+
+async function generateCode(){
+  const btn = $('genCodeBtn');
+  const input = $('rCode');
+  setBtn(btn, true, '');
+  input.value = '⏳ ရယူနေသည်...';
+
+  let code = null;
+
+  // Strategy 1 — Supabase RPC (only if online)
+  if(SB.ok){
+    try {
+      const result = await SB.rpc('next_repair_code');
+      if(typeof result === 'string' && /^KZ-\d+$/.test(result)){
+        code = result;
+        diag('✅ Code via RPC: ' + result);
+      }
+    } catch(e){
+      diag('RPC error: ' + e.message);
+    }
+  }
+
+  // Strategy 2 — Scan Supabase repairs table for max
+  if(!code && SB.ok){
+    try {
+      const rows = await SB.select('repairs', 'select=code&code=like.KZ-*&order=code.desc&limit=200');
+      let max = 1000;
+      (rows || []).forEach(r => {
+        const m = String(r.code||'').match(/^KZ-(\d+)$/);
+        if(m){ const n = parseInt(m[1],10); if(n > max) max = n; }
+      });
+      code = 'KZ-' + (max + 1);
+      diag('✅ Code via scan: ' + code);
+    } catch(e){
+      diag('Scan error: ' + e.message);
+    }
+  }
+
+  // Strategy 3 — Local max + 1 (always works)
+  if(!code){
+    const max = getLocalMaxCode();
+    code = 'KZ-' + (max + 1);
+    diag('📱 Code via local: ' + code);
+  }
+
+  input.value = code;
+  lsSet(LS.seq, parseInt(code.replace('KZ-',''), 10));
+  setBtn(btn, false);
+  toast('Code ရပါပြီ — ' + code, 'ok');
+  Sound.click();
+}
+
+/* ═══════════════════════════════════════════════════════
+   SUPABASE SYNC
+═══════════════════════════════════════════════════════ */
+async function pushRepair(r){
+  if(!SB.ok) return false;
+  try {
+    await SB.upsert('repairs', toDbRepair(r), 'code');
+    return true;
+  } catch(e){
+    diag('Push repair fail: ' + e.message);
+    return false;
+  }
+}
+async function pushAd(a){
+  if(!SB.ok) return false;
+  try {
+    if(a._dbId){
+      await SB.update('ads', 'id=eq.' + a._dbId, toDbAd(a));
+    } else {
+      const rows = await SB.insert('ads', toDbAd(a));
+      if(rows && rows[0]) a._dbId = rows[0].id;
+    }
+    return true;
+  } catch(e){
+    diag('Push ad fail: ' + e.message);
+    return false;
+  }
+}
+
+async function pullFromCloud(){
+  if(!SB.ok) return;
+  try {
+    const rows = await SB.select('repairs', 'select=*&order=created_at.desc');
+    if(rows){
+      const cloudCodes = new Set(rows.map(r => r.code));
+      const merged = rows.map(fromDbRepair);
+      // keep local-only
+      repairs.forEach(r => { if(!cloudCodes.has(r.code)) merged.push(r); });
+      repairs = merged;
+      lsSet(LS.repairs, repairs);
+    }
+  } catch(e){ diag('Pull repairs: ' + e.message); }
+  try {
+    const rows = await SB.select('ads', 'select=*&order=created_at.desc');
+    if(rows){
+      const cloud = rows.map(fromDbAd);
+      const cloudKeys = new Set(cloud.map(a => a.business + '|' + a.phone));
+      ads.forEach(a => { if(!cloudKeys.has(a.business + '|' + a.phone) && !a._dbId) cloud.push(a); });
+      ads = cloud;
+      lsSet(LS.ads, ads);
+    }
+  } catch(e){ diag('Pull ads: ' + e.message); }
+}
+
+async function refreshRepairs(){
+  if(!SB.ok){ toast('Supabase မရ — local ပဲ','err'); return; }
+  try {
+    await pullFromCloud();
+    renderRepairList();
+    toast('Refresh ပြီးပါပြီ','ok');
+  } catch(e){ toast('Refresh မရ: ' + e.message,'err'); }
+}
+async function refreshAds(){
+  if(!SB.ok){ toast('Supabase မရ','err'); return; }
+  try {
+    await pullFromCloud();
+    renderAdList(); renderAdsPublic();
+    toast('Refresh ပြီးပါပြီ','ok');
+  } catch(e){ toast('Refresh မရ','err'); }
+}
+
+async function manualSync(){
+  toast('Sync ကြိုးစားနေသည်...');
+  setConn('pending');
+  const r = await SB.test();
+  if(r.ok){
+    setConn('ok'); setSync('ok','☁️ Supabase ချိတ်ပြီး — Cloud Sync ဖွင့်');
+    diag('✅ Supabase online');
+    // Push all local
+    for(const rep of repairs){ await pushRepair(rep); }
+    for(const ad of ads){ await pushAd(ad); }
+    await pullFromCloud();
+    renderRepairList(); renderAdList(); renderAdsPublic();
+    toast('Sync ပြီးပါပြီ','ok'); Sound.ok();
+  } else {
+    setConn('err'); setSync('err','⚠️ Supabase မရ — ' + (r.error || 'Network'));
+    diag('❌ Sync fail: ' + (r.error || 'Unknown'));
+    toast('Supabase မရ — Local Mode','err');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   REPAIR SEARCH + RESULT
+═══════════════════════════════════════════════════════ */
+async function searchRepair(){
+  const btn = $('searchRepairBtn');
+  const v = $('codeInput').value.trim().toUpperCase();
+  if(!v){ toast('Code ဖြည့်ပါ','err'); Sound.err(); return; }
+  setBtn(btn, true, 'ရှာဖွေနေသည်...');
+
+  let found = repairs.find(r => String(r.code).toUpperCase() === v);
+
+  // If online and not found locally, try cloud
+  if(!found && SB.ok){
+    try {
+      const rows = await SB.select('repairs', 'code=eq.' + encodeURIComponent(v));
+      if(rows && rows[0]){
+        found = fromDbRepair(rows[0]);
+        // Add to local cache
+        repairs.unshift(found);
+        lsSet(LS.repairs, repairs);
+      }
+    } catch(e){ diag('Search cloud: ' + e.message); }
+  }
+
+  setBtn(btn, false);
+  if(!found){ toast('ဤ Code ဖြင့် မတွေ့ပါ','err'); Sound.err(); return; }
+  Sound.click();
+  showResult(found);
+}
+
+function showResult(r){
+  currentRepair = r;
+  const st = STATUS[r.status] || STATUS.received;
+  const c = $('resultCard');
+  c.style.setProperty('--c1', st.color);
+  c.style.setProperty('--c2', st.color2);
+  $('resStatusText').textContent = st.label;
+  $('stage').style.setProperty('--c1', st.color);
+  $('stage').innerHTML = `<div class="icon-big">${st.icon}</div>`;
+  $('resStepper').innerHTML = renderStepper(r.status);
+  $('resBanner').innerHTML = (r.status==='noparts') ? `<div class="notice" style="margin-top:16px">⛔ ဤပစ္စည်းအတွက် ပြုပြင်ရန် မရနိုင်တော့ပါ။</div>` : '';
+  const info = [
+    ['Code', r.code||'—'],
+    ['ပိုင်ရှင်အမည်', r.owner||'—'],
+    ['ဖုန်းနံပါတ်', r.phone||'—'],
+    ['ပစ္စည်းအမျိုးအစား', r.device||'—'],
+    ['မော်ဒယ်နံပါတ်', r.model||'—'],
+    ['လိပ်စာ', r.address||'—'],
+    ['အပ်နှံအချိန်', fmt(r.receivedAt)],
+    ['စတင်ပြုပြင်သည့်အချိန်', fmt(r.startAt)],
+    ['ပြုပြင်ပြီးစီးအချိန်', fmt(r.doneAt)],
+    ['ကျသင့်ငွေ', (r.cost ? money(r.cost)+' ကျပ်' + (r.status==='done'?'':' (ခန့်မှန်း)') : 'မသတ်မှတ်ရသေးပါ')]
+  ];
+  if(r.note) info.push(['မှတ်ချက်', r.note]);
+  $('resInfo').innerHTML = info.map(([k,v]) => {
+    const m = k==='ကျသင့်ငွေ';
+    return `<div class="info-item${m?' money':''}"><div class="k">${k}</div><div class="v">${esc(v)}</div></div>`;
+  }).join('');
+  showView('result');
+  animateProgress(st.pct);
+  if(elapsedTimer) clearInterval(elapsedTimer);
+  tickElapsed();
+  elapsedTimer = setInterval(tickElapsed, 1000);
+  function tickElapsed(){
+    if(!currentRepair) return;
+    const base = currentRepair.receivedAt ? new Date(currentRepair.receivedAt).getTime() : Date.now();
+    const el = $('resElapsed'); if(el) el.textContent = 'ကြာချိန် — ' + dur(Date.now() - base);
+  }
+}
+function animateProgress(target){
+  const fill = $('resFill'), pctEl = $('resPct');
+  if(pctTimer) clearInterval(pctTimer);
+  if(!fill) return;
+  fill.style.transition='none'; fill.style.width='0%'; pctEl.textContent='0%';
+  setTimeout(() => {
+    fill.style.transition='width 1.5s ease';
+    fill.style.width = target + '%';
+  }, 30);
+  let cur = 0;
+  const step = Math.max(1, Math.round(target/40));
+  pctTimer = setInterval(() => {
+    cur += step;
+    if(cur >= target){ cur = target; clearInterval(pctTimer); }
+    pctEl.textContent = cur + '%';
+  }, 40);
+}
+function renderStepper(status){
+  const steps = ['လက်ခံထားသည်','စစ်ဆေးနေပါသည်','ပြုပြင်နေပါပြီ','ပြုပြင်ပြီးစီး'];
+  const idx = (STATUS[status]||STATUS.received).step;
+  return steps.map((t,i) => {
+    let cls = 'step';
+    if(i<idx) cls += ' done';
+    if(i===idx) cls += ' active';
+    if(status==='noparts' && i===1) cls += ' error';
+    const inner = (i<idx)?'✓':(i===idx && status==='noparts'?'✕':(i+1));
+    return `<div class="${cls}"><div class="step-dot">${inner}</div><div class="step-label">${t}</div></div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   ADS PUBLIC
+═══════════════════════════════════════════════════════ */
+function initAdsFilters(){
+  const sel = $('adCatFilter'); if(!sel) return;
+  sel.innerHTML = '<option value="">— အမျိုးအစား အားလုံး —</option>' + AD_CATEGORIES.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  const chips = [
+    {k:'all',l:'အားလုံး'},{k:'featured',l:'⭐ အထူး',cls:'feat'},
+    {k:'new',l:'🆕 အသစ်'},{k:'discount',l:'🏷️ လျှော့ဈေး'},
+    {k:'used',l:'♻️ အသုံးပြုပြီး'},{k:'service',l:'🛠️ ဝန်ဆောင်မှု'},{k:'job',l:'💼 အလုပ်'}
+  ];
+  $('adFilters').innerHTML = chips.map(c => `<button class="chip ${c.cls||''} ${adFilter===c.k?'active':''}" onclick="setAdFilter('${c.k}')">${c.l}</button>`).join('');
+}
+function setAdFilter(k){
+  adFilter = k;
+  const keys = ['all','featured','new','discount','used','service','job'];
+  document.querySelectorAll('#adFilters .chip').forEach((el,i) => el.classList.toggle('active', keys[i]===k));
+  renderAdsPublic();
+}
+function renderAdsPublic(){
+  const grid = $('adGrid'); if(!grid) return;
+  let list = ads.slice();
+  adCatFilter = $('adCatFilter') ? $('adCatFilter').value : '';
+  list = list.filter(a => a.active !== false);
+  const q = ($('adSearch') ? $('adSearch').value : '').trim().toLowerCase();
+  list = list.filter(a => {
+    if(adFilter === 'featured' && !a.featured) return false;
+    if(adFilter !== 'all' && adFilter !== 'featured' && a.adType !== adFilter) return false;
+    if(adCatFilter && a.category !== adCatFilter) return false;
+    if(q){
+      const h = [a.business,a.category,a.description,a.tags,a.location,a.contact].join(' ').toLowerCase();
+      if(!h.includes(q)) return false;
+    }
+    return true;
+  });
+  list.sort((a,b) => (b.featured?1:0) - (a.featured?1:0));
+  if(!list.length){
+    grid.innerHTML = `<div class="empty"><div>📭</div>ကြော်ငြာ မတွေ့ပါ</div>`;
+    return;
+  }
+  grid.innerHTML = list.map((a,i) => card(a,i)).join('');
+}
+function card(a, i){
+  const t = AD_TYPES[a.adType] || AD_TYPES.new;
+  const d = calcOff(a.price, a.oldPrice);
+  const exp = isExpired(a.expiry);
+  const tags = (a.tags||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const img = a.image ? `<img src="${a.image}" alt="${esc(a.business)}" loading="lazy">` : `<div class="placeholder">${t.icon}</div>`;
+  const id = a._dbId || a.id || a._localId;
+  return `<div class="ad-card ${a.featured?'featured':''} ${exp?'inactive':''}" onclick="openAdDetail('${id}')">
+    <div class="ad-media">${img}
+      <div class="media-badges">
+        <div>${a.featured ? '<span class="b b-feat">⭐ အထူး</span>' : ''}</div>
+        <div><span class="b b-type">${t.icon} ${t.short}</span>${d ? `<span class="b b-off" style="margin-left:5px">-${d}%</span>` : ''}</div>
+      </div>
+    </div>
+    <div class="ad-body">
+      <h4>${esc(a.business||'—')}</h4>
+      <div class="ad-cats">
+        ${a.category ? `<span class="tag">${esc(a.category)}</span>` : ''}
+        ${exp ? `<span class="tag gray" style="background:rgba(239,68,68,.16);color:#ff9a9a">⏰ ကုန်</span>` : ''}
+        ${tags.slice(0,2).map(x => `<span class="tag gray">${esc(x)}</span>`).join('')}
+      </div>
+      ${a.description ? `<div class="ad-desc">${esc(a.description)}</div>` : ''}
+      <div class="ad-price-row">
+        <span class="ad-price">${money(a.price)}${a.price?' ကျပ်':''}</span>
+        ${a.oldPrice ? `<span class="ad-old">${money(a.oldPrice)} ကျပ်</span>` : ''}
+        ${d ? `<span class="ad-off">-${d}%</span>` : ''}
+      </div>
+      <div class="ad-meta">
+        ${a.qty ? `<span>📦 ${esc(a.qty)}</span>` : ''}
+        ${a.location ? `<span>📍 ${esc(a.location)}</span>` : ''}
+        <span>👁 ${a.views||0}</span>
+      </div>
+      <div class="ad-actions" onclick="event.stopPropagation()">
+        <a class="ad-call" href="tel:${esc(a.phone||'')}">📞 ${esc(a.phone||'—')}</a>
+        <button class="ad-detail-btn" onclick="openAdDetail('${id}')">အသေးစိတ်</button>
+      </div>
+    </div>
+  </div>`;
+}
+function findAd(id){
+  return ads.find(a => String(a._dbId||a.id||a._localId) === String(id));
+}
+function openAdDetail(id){
+  const a = findAd(id);
+  if(!a) return;
+  a.views = (a.views||0) + 1;
+  lsSet(LS.ads, ads);
+  const t = AD_TYPES[a.adType] || AD_TYPES.new;
+  const d = calcOff(a.price, a.oldPrice);
+  const tags = (a.tags||'').split(',').map(s=>s.trim()).filter(Boolean);
+  const img = a.image ? `<img src="${a.image}" alt="">` : `<div class="placeholder">${t.icon}</div>`;
+  $('adDetailBody').innerHTML = `
+    <div class="ad-detail-hero">${img}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px">
+      ${a.featured ? `<span class="tag" style="background:linear-gradient(135deg,#f9a8d4,#db2777);color:#fff;border:none;font-weight:700">⭐ အထူး</span>` : ''}
+      <span class="tag">${t.icon} ${t.label}</span>
+      ${a.category ? `<span class="tag gray">${esc(a.category)}</span>` : ''}
+    </div>
+    <h4 style="font-size:19px;line-height:1.5;margin-bottom:6px">${esc(a.business||'—')}</h4>
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <span style="color:#7dffb0;font-weight:700;font-size:24px">${money(a.price)}${a.price?' ကျပ်':''}</span>
+      ${a.oldPrice ? `<span class="ad-old" style="font-size:14px">${money(a.oldPrice)} ကျပ်</span>` : ''}
+      ${d ? `<span class="ad-off">-${d}%</span>` : ''}
+    </div>
+    ${a.description ? `<div class="detail-desc">${esc(a.description)}</div>` : ''}
+    <div class="detail-grid">
+      ${a.qty ? `<div class="detail-item"><div class="k">အရေအတွက်</div><div class="v">${esc(a.qty)}</div></div>` : ''}
+      ${a.contact ? `<div class="detail-item"><div class="k">ပုဂ္ဂိုလ်</div><div class="v">${esc(a.contact)}</div></div>` : ''}
+      ${a.phone ? `<div class="detail-item"><div class="k">ဖုန်း</div><div class="v">${esc(a.phone)}</div></div>` : ''}
+      ${a.location ? `<div class="detail-item"><div class="k">တည်နေရာ</div><div class="v">${esc(a.location)}</div></div>` : ''}
+      ${a.expiry ? `<div class="detail-item"><div class="k">သက်တမ်း</div><div class="v">${fmtDate(a.expiry)}</div></div>` : ''}
+      <div class="detail-item"><div class="k">ကြည့်ရှုမှု</div><div class="v">${a.views||0} ကြိမ်</div></div>
+    </div>
+    ${tags.length ? `<div style="display:flex;flex-wrap:wrap;gap:7px;margin:14px 0">${tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>` : ''}
+    <div class="row" style="margin-top:16px">
+      <a class="btn" style="flex:1;text-align:center;text-decoration:none;display:grid;place-items:center" href="tel:${esc(a.phone||'')}">📞 ဆက်သွယ်ရန်</a>
+      <button class="btn ghost" style="flex:0 0 auto" onclick="closeAdDetail()">ပိတ်မည်</button>
+    </div>`;
+  $('adDetailModal').classList.add('show');
+  if(SB.ok && a._dbId){
+    SB.rpc('increment_ad_views', { ad_id: Number(a._dbId) }).catch(()=>{});
+  }
+}
+function closeAdDetail(){ $('adDetailModal').classList.remove('show'); }
+
+/* ═══════════════════════════════════════════════════════
+   REPAIR CRUD
+═══════════════════════════════════════════════════════ */
+function openRepairModal(){
+  editRepairCode = null;
+  $('rmTitle').textContent = '🔧 ပြုပြင်ပစ္စည်း လက်ခံမည်';
+  ['rOwner','rPhone','rAddress','rDevice','rModel','rNote'].forEach(id => { const el=$(id); if(el) el.value=''; });
+  $('rReceived').value = toLocal(new Date().toISOString());
+  $('repairSaveBtn').textContent = '💾 Save လုပ်မည်';
+  $('rCode').value = '';
+  $('rCode').disabled = false;
+  $('repairModal').classList.add('show');
+  // Auto generate on open
+  setTimeout(() => generateCode(), 200);
+}
+function closeRepairModal(){ $('repairModal').classList.remove('show'); }
+
+function editRepair(code){
+  const r = repairs.find(x => x.code === code);
+  if(!r) return;
+  editRepairCode = code;
+  $('rmTitle').textContent = '✏️ ပြင်ဆင်ရန် — ' + code;
+  $('rCode').value = r.code || '';
+  $('rCode').disabled = true;
+  $('rOwner').value = r.owner || '';
+  $('rPhone').value = r.phone || '';
+  $('rAddress').value = r.address || '';
+  $('rDevice').value = r.device || '';
+  $('rModel').value = r.model || '';
+  $('rReceived').value = toLocal(r.receivedAt);
+  $('rNote').value = r.note || '';
+  $('repairSaveBtn').textContent = '💾 သိမ်းဆည်းမည်';
+  $('repairModal').classList.add('show');
+}
+
+async function saveRepair(){
+  const btn = $('repairSaveBtn');
+  const code = $('rCode').value.trim().toUpperCase();
+  const owner = $('rOwner').value.trim();
+  const phone = $('rPhone').value.trim();
+  const device = $('rDevice').value.trim();
+  if(!code || !/^KZ-\d+$/.test(code)){ toast('Code မမှန် — 🎲 Generate နှိပ်ပါ','err'); Sound.err(); return; }
+  if(!owner){ toast('ပိုင်ရှင်အမည် ဖြည့်ပါ','err'); Sound.err(); return; }
+  if(!phone){ toast('ဖုန်းနံပါတ် ဖြည့်ပါ','err'); Sound.err(); return; }
+  if(!device){ toast('ပစ္စည်းအမျိုးအစား ဖြည့်ပါ','err'); Sound.err(); return; }
+
+  setBtn(btn, true, 'သိမ်းဆည်းနေသည်...');
+
+  const obj = {
+    code, owner, phone,
+    address: $('rAddress').value.trim(),
+    device, model: $('rModel').value.trim(),
+    receivedAt: fromLocal($('rReceived').value) || new Date().toISOString(),
+    note: $('rNote').value.trim()
+  };
+
+  try {
+    if(editRepairCode){
+      const i = repairs.findIndex(r => r.code === editRepairCode);
+      if(i > -1){
+        obj.status = repairs[i].status;
+        obj.startAt = repairs[i].startAt;
+        obj.doneAt = repairs[i].doneAt;
+        obj.cost = repairs[i].cost;
+        repairs[i] = obj;
+      }
+      toast('ပြင်ဆင်ပြီးပါပြီ','ok');
+    } else {
+      if(repairs.find(r => r.code === code)){ toast('Code ရှိပြီးဖြစ်သည် — 🎲 ပြန် Generate ပါ','err'); Sound.err(); setBtn(btn,false); return; }
+      obj.status = 'received'; obj.startAt = ''; obj.doneAt = ''; obj.cost = 0;
+      repairs.unshift(obj);
+      toast('လက်ခံပြီးပါပြီ — ' + code, 'ok');
+      Sound.ok();
+    }
+    lsSet(LS.repairs, repairs);
+    closeRepairModal();
+    renderRepairList();
+
+    // Background cloud push (silent)
+    if(SB.ok){
+      pushRepair(obj).then(ok => {
+        if(ok) diag('✅ Cloud push OK: ' + code);
+        else diag('⚠️ Cloud push fail: ' + code);
+      });
+    }
+  } catch(e){
+    toast('သိမ်းမရ: ' + e.message,'err');
+  } finally {
+    setBtn(btn, false);
+  }
+}
+
+async function deleteRepair(code){
+  if(!confirm('ဤပစ္စည်း (' + code + ') ကို ဖျက်မှာ သေချာပါသလား?')) return;
+  repairs = repairs.filter(r => r.code !== code);
+  lsSet(LS.repairs, repairs);
+  renderRepairList();
+  toast('ဖျက်ပြီးပါပြီ','ok');
+  if(SB.ok){
+    SB.remove('repairs', 'code=eq.' + encodeURIComponent(code)).catch(e => diag('Delete cloud: ' + e.message));
+  }
+}
+
+function openStatusModal(code){
+  const r = repairs.find(x => x.code === code);
+  if(!r) return;
+  statusCode = code;
+  statusPick = r.status || 'received';
+  $('smSub').textContent = r.code + ' — ' + (r.owner||'') + ' | ' + (r.device||'');
+  renderStatusPicker();
+  $('smStart').value = toLocal(r.startAt);
+  $('smDone').value = toLocal(r.doneAt);
+  $('smCost').value = r.cost || '';
+  $('smNote').value = r.note || '';
+  $('statusModal').classList.add('show');
+}
+function closeStatusModal(){ $('statusModal').classList.remove('show'); }
+function renderStatusPicker(){
+  $('statusPicker').innerHTML = STATUS_ORDER.map(k => {
+    const s = STATUS[k];
+    const sel = (k===statusPick) ? ' sel' : '';
+    return `<div class="sp-opt${sel}" style="--sc:${s.color}" onclick="pickStatus('${k}')">
+      <span class="sp-dot"></span><span class="sp-txt">${s.label}</span></div>`;
+  }).join('');
+}
+function pickStatus(k){
+  statusPick = k;
+  renderStatusPicker();
+  if(k==='repairing' && !$('smStart').value) $('smStart').value = toLocal(new Date().toISOString());
+  if(k==='done' && !$('smDone').value) $('smDone').value = toLocal(new Date().toISOString());
+}
+function saveStatus(){
+  const btn = $('statusSaveBtn');
+  const i = repairs.findIndex(r => r.code === statusCode);
+  if(i < 0){ toast('မတွေ့ပါ','err'); return; }
+  setBtn(btn, true, 'သတ်မှတ်နေသည်...');
+  const r = repairs[i];
+  r.status = statusPick;
+  r.startAt = fromLocal($('smStart').value) || r.startAt || '';
+  r.doneAt = fromLocal($('smDone').value) || r.doneAt || '';
+  r.cost = Number($('smCost').value) || 0;
+  r.note = $('smNote').value.trim();
+  if(statusPick==='repairing' && !r.startAt) r.startAt = new Date().toISOString();
+  if(statusPick==='done' && !r.doneAt) r.doneAt = new Date().toISOString();
+
+  lsSet(LS.repairs, repairs);
+  closeStatusModal();
+  renderRepairList();
+  toast('သတ်မှတ်ပြီးပါပြီ','ok');
+  Sound.ok();
+  setBtn(btn, false);
+
+  if(SB.ok){
+    pushRepair(r).then(ok => diag('Status push: ' + (ok ? 'OK' : 'fail')));
+  }
+}
+
+function renderRepairList(){
+  const cnt = $('repairCount'); if(cnt) cnt.textContent = repairs.length;
+  const box = $('repairList'); if(!box) return;
+  if(!repairs.length){ box.innerHTML = `<div class="empty"><div>📭</div>ပစ္စည်း စာရင်း မရှိသေးပါ</div>`; return; }
+  box.innerHTML = repairs.map(r => {
+    const st = STATUS[r.status] || STATUS.received;
+    const d = r.receivedAt ? dur(Date.now() - new Date(r.receivedAt).getTime()) : '—';
+    return `<div class="list-item">
+      <div class="li-main">
+        <strong>${esc(r.code)} — ${esc(r.owner||'—')}</strong>
+        <small>📞 ${esc(r.phone||'—')} | ${esc(r.device||'—')} ${r.model?'('+esc(r.model)+')':''}</small>
+        <small>📅 အပ်: ${fmt(r.receivedAt)} | ⏱ ${d}</small>
+        <small>🛠 စတင်: ${fmt(r.startAt)} | ✅ ပြီး: ${fmt(r.doneAt)}</small>
+        <small>💰 ${money(r.cost)} ကျပ်</small>
+        <span class="pill" style="background:${st.color}22;color:${st.color};border:1px solid ${st.color}66">${st.label}</span>
+      </div>
+      <div class="li-actions">
+        <button class="icon-btn acc" onclick="openStatusModal('${esc(r.code)}')">🔧</button>
+        <button class="icon-btn" onclick="editRepair('${esc(r.code)}')">✏️</button>
+        <button class="icon-btn del" onclick="deleteRepair('${esc(r.code)}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   ADS CRUD
+═══════════════════════════════════════════════════════ */
+function fillCategorySelect(){
+  const sel = $('aCategory'); if(!sel) return;
+  sel.innerHTML = '<option value="">— ရွေးပါ —</option>' + AD_CATEGORIES.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+function renderImgZone(){
+  const z = $('adImgZone'); if(!z) return;
+  if(adImgData){
+    z.innerHTML = `<div class="img-preview"><img src="${adImgData}" alt=""><button class="img-remove" onclick="removeAdImage()" type="button">✕</button></div>`;
+  } else {
+    z.innerHTML = `<div class="img-upload" onclick="document.getElementById('adImgFile').click()"><div class="up-ico">🖼️</div><p><b style="color:var(--gold)">ဓာတ်ပုံ ရွေးရန် နှိပ်ပါ</b><br>JPG / PNG — Auto resize</p></div>`;
+  }
+}
+function handleAdImage(ev){
+  const f = ev.target.files && ev.target.files[0];
+  if(!f) return;
+  if(!f.type.startsWith('image/')){ toast('ဓာတ်ပုံ ဖိုင်သာ','err'); return; }
+  if(f.size > 8*1024*1024){ toast('8MB အောက်','err'); return; }
+  const rd = new FileReader();
+  rd.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if(w > 800){ h = Math.round(h * 800 / w); w = 800; }
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      adImgData = c.toDataURL('image/jpeg', 0.72);
+      renderImgZone();
+    };
+    img.onerror = () => toast('ဖတ်မရပါ','err');
+    img.src = e.target.result;
+  };
+  rd.readAsDataURL(f);
+  ev.target.value = '';
+}
+function removeAdImage(){ adImgData = ''; renderImgZone(); }
+
+function openAdModal(){
+  editAdKey = null; adImgData = '';
+  fillCategorySelect();
+  $('amTitle').textContent = '📢 ကြော်ငြာ အသစ်';
+  ['aBusiness','aDesc','aQty','aPrice','aOldPrice','aPhone','aContact','aLocation','aTags','aExpiry'].forEach(id => { const el=$(id); if(el) el.value=''; });
+  $('aType').value = 'new'; $('aCategory').value = '';
+  $('aFeatured').checked = false; $('aActive').checked = true;
+  renderImgZone();
+  $('adSaveBtn').textContent = '💾 Save လုပ်မည်';
+  $('adModal').classList.add('show');
+}
+function closeAdModal(){ $('adModal').classList.remove('show'); }
+
+function editAd(id){
+  const a = findAd(id);
+  if(!a) return;
+  editAdKey = id;
+  adImgData = a.image || '';
+  fillCategorySelect();
+  $('amTitle').textContent = '✏️ ကြော်ငြာ ပြင်ဆင်ရန်';
+  $('aBusiness').value = a.business || '';
+  $('aType').value = a.adType || 'new';
+  $('aCategory').value = a.category || '';
+  $('aDesc').value = a.description || '';
+  $('aQty').value = a.qty || '';
+  $('aPrice').value = a.price || '';
+  $('aOldPrice').value = a.oldPrice || '';
+  $('aPhone').value = a.phone || '';
+  $('aContact').value = a.contact || '';
+  $('aLocation').value = a.location || '';
+  $('aTags').value = a.tags || '';
+  $('aExpiry').value = toDateInput(a.expiry);
+  $('aFeatured').checked = !!a.featured;
+  $('aActive').checked = a.active !== false;
+  renderImgZone();
+  $('adSaveBtn').textContent = '💾 သိမ်းဆည်းမည်';
+  $('adModal').classList.add('show');
+}
+
+async function saveAd(){
+  const btn = $('adSaveBtn');
+  const business = $('aBusiness').value.trim();
+  const category = $('aCategory').value;
+  const desc = $('aDesc').value.trim();
+  const price = $('aPrice').value.trim();
+  const phone = $('aPhone').value.trim();
+  if(!business){ toast('လုပ်ငန်းအမည် ဖြည့်ပါ','err'); Sound.err(); return; }
+  if(!category){ toast('အမျိုးအစား ရွေးပါ','err'); Sound.err(); return; }
+  if(!desc){ toast('အကြောင်းအရာ ဖြည့်ပါ','err'); Sound.err(); return; }
+  if(!price){ toast('ဈေးနှုန်း ဖြည့်ပါ','err'); Sound.err(); return; }
+  if(!phone){ toast('ဖုန်းနံပါတ် ဖြည့်ပါ','err'); Sound.err(); return; }
+
+  setBtn(btn, true, 'သိမ်းဆည်းနေသည်...');
+
+  const obj = {
+    business,
+    adType: $('aType').value || 'new',
+    category,
+    description: desc,
+    image: adImgData || '',
+    qty: $('aQty').value.trim(),
+    price: price,
+    oldPrice: $('aOldPrice').value.trim(),
+    phone,
+    contact: $('aContact').value.trim(),
+    location: $('aLocation').value.trim(),
+    tags: $('aTags').value.trim(),
+    featured: !!$('aFeatured').checked,
+    active: !!$('aActive').checked,
+    expiry: $('aExpiry').value ? fromDateInput($('aExpiry').value) : '',
+    views: 0
+  };
+
+  try {
+    if(editAdKey){
+      const i = ads.findIndex(a => String(a._dbId||a.id||a._localId) === String(editAdKey));
+      if(i > -1){
+        obj._dbId = ads[i]._dbId;
+        obj._localId = ads[i]._localId;
+        obj.id = ads[i].id;
+        obj.views = ads[i].views || 0;
+        obj.createdAt = ads[i].createdAt;
+        ads[i] = obj;
+      }
+      toast('ပြင်ဆင်ပြီးပါပြီ','ok');
+    } else {
+      obj._localId = Date.now() + Math.floor(Math.random()*1000);
+      obj.createdAt = new Date().toISOString();
+      ads.unshift(obj);
+      toast('ကြော်ငြာ တင်ပြီးပါပြီ','ok');
+      Sound.ok();
+    }
+    lsSet(LS.ads, ads);
+    closeAdModal();
+    renderAdList();
+    initAdsFilters();
+    renderAdsPublic();
+
+    // Background push
+    if(SB.ok){
+      pushAd(obj).then(ok => {
+        if(ok){
+          lsSet(LS.ads, ads);
+          diag('✅ Ad pushed to cloud');
+        } else {
+          diag('⚠️ Ad push failed');
+        }
+      });
+    }
+  } catch(e){
+    toast('သိမ်းမရ: ' + e.message,'err');
+  } finally {
+    setBtn(btn, false);
+  }
+}
+
+function deleteAd(id){
+  if(!confirm('ဤကြော်ငြာကို ဖျက်မှာ သေချာပါသလား?')) return;
+  const a = findAd(id);
+  ads = ads.filter(x => String(x._dbId||x.id||x._localId) !== String(id));
+  lsSet(LS.ads, ads);
+  renderAdList(); renderAdsPublic();
+  toast('ဖျက်ပြီးပါပြီ','ok');
+  if(SB.ok && a && a._dbId){
+    SB.remove('ads', 'id=eq.' + a._dbId).catch(e => diag('Delete ad: ' + e.message));
+  }
+}
+function toggleAdActive(id){
+  const a = findAd(id);
+  if(!a) return;
+  a.active = !(a.active !== false);
+  lsSet(LS.ads, ads);
+  renderAdList(); renderAdsPublic();
+  toast(a.active ? 'ဖွင့်ပြီးပါပြီ' : 'ပိတ်ပြီးပါပြီ','ok');
+  if(SB.ok) pushAd(a);
+}
+
+function renderAdList(){
+  const cnt = $('adCount'); if(cnt) cnt.textContent = ads.length;
+  const box = $('adList'); if(!box) return;
+  if(!ads.length){ box.innerHTML = `<div class="empty"><div>📭</div>ကြော်ငြာ စာရင်း မရှိသေးပါ</div>`; return; }
+  box.innerHTML = ads.map(a => {
+    const t = AD_TYPES[a.adType] || AD_TYPES.new;
+    const d = calcOff(a.price, a.oldPrice);
+    const exp = isExpired(a.expiry);
+    const th = a.image ? `<div class="li-thumb"><img src="${a.image}" alt=""></div>` : `<div class="li-thumb">${t.icon}</div>`;
+    const id = a._dbId || a.id || a._localId;
+    return `<div class="list-item">
+      ${th}
+      <div class="li-main">
+        <strong>${esc(a.business||'—')}</strong>
+        <small>${t.icon} ${t.label} | 🏷️ ${esc(a.category||'—')}</small>
+        <small>💰 ${money(a.price)} ကျပ် ${a.oldPrice?'<span style="text-decoration:line-through;opacity:.6">'+money(a.oldPrice)+'</span>':''} ${d?'<span style="color:#ff9a9a">(-'+d+'%)</span>':''}</small>
+        <small>📞 ${esc(a.phone||'—')} | 👁 ${a.views||0} | 📦 ${esc(a.qty||'—')}</small>
+        ${a.expiry ? `<small>⏰ ${fmtDate(a.expiry)} ${exp?'<span style="color:#ff9a9a">(ကုန်)</span>':''}</small>` : ''}
+        <div style="margin-top:6px">
+          ${a.featured ? '<span class="pill" style="background:rgba(219,39,119,.2);color:#f9a8d4;border:1px solid rgba(219,39,119,.45)">⭐ အထူး</span>' : ''}
+          <span class="pill" style="background:${a.active!==false?'rgba(34,197,94,.18)':'rgba(239,68,68,.18)'};color:${a.active!==false?'#86efac':'#ff9a9a'};border:1px solid ${a.active!==false?'rgba(34,197,94,.4)':'rgba(239,68,68,.4)'}">${a.active!==false?'✅ ဖွင့်':'⛔ ပိတ်'}</span>
+        </div>
+      </div>
+      <div class="li-actions">
+        <button class="icon-btn acc" onclick="toggleAdActive('${id}')">${a.active!==false?'⏸':'▶'}</button>
+        <button class="icon-btn" onclick="editAd('${id}')">✏️</button>
+        <button class="icon-btn del" onclick="deleteAd('${id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   EVENT LISTENERS
+═══════════════════════════════════════════════════════ */
+let lastCodeLen = 0;
+document.addEventListener('keydown', e => {
+  if(e.target.id === 'codeInput' && e.key === 'Enter') searchRepair();
+  if(['lgName','lgViber','lgPass'].includes(e.target.id) && e.key === 'Enter') doLogin();
+});
+document.addEventListener('input', e => {
+  if(e.target.id === 'codeInput'){
+    e.target.value = e.target.value.toUpperCase();
+    const l = e.target.value.length;
+    if(l > lastCodeLen) Sound.click();
+    lastCodeLen = l;
+  }
+});
+['repairModal','statusModal','adModal','adDetailModal'].forEach(id => {
+  const el = $(id);
+  if(el) el.addEventListener('click', e => {
+    if(e.target.id === id){
+      if(id === 'repairModal') closeRepairModal();
+      else if(id === 'statusModal') closeStatusModal();
+      else if(id === 'adModal') closeAdModal();
+      else if(id === 'adDetailModal') closeAdDetail();
+    }
+  });
+});
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════ */
+(function init(){
+  try {
+    fillCategorySelect();
+    initAdsFilters();
+    renderAdsPublic();
+    renderRepairList();
+    renderAdList();
+  } catch(e){ console.error('UI init:', e); }
+
+  // Connection test in background
+  setTimeout(async () => {
+    diag('Testing Supabase...');
+    setConn('pending');
+    setSync('pending','Supabase စစ်ဆေးနေသည်...');
+    const r = await SB.test();
+    if(r.ok){
+      setConn('ok');
+      setSync('ok','☁️ Supabase ချိတ်ပြီး — Cloud Sync ဖွင့်');
+      diag('✅ Supabase online — pull data');
+      await pullFromCloud();
+      renderRepairList(); renderAdList(); renderAdsPublic();
+    } else {
+      setConn('err');
+      setSync('err','⚠️ Supabase မရ — ' + (r.error || 'Network'));
+      diag('❌ Offline mode');
+    }
+  }, 100);
+})();
+</script>
+</body>
+</html>
